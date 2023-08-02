@@ -36,16 +36,26 @@ export const addNewUser = createAsyncThunk("users/addNewUser", async (body) => {
 
 export const updateUser = createAsyncThunk(
   "users/updateUser",
-  async (id, name) => {
-    console.log(name);
+  async (userData) => {
+    const { id, name, surname, job, details, gender, email, birthDate } =
+      userData;
     try {
       const response = await axios.patch(
-        `https://61294559068adf001789b85c.mockapi.io/api/users/7`,
-        name
+        `https://61294559068adf001789b85c.mockapi.io/api/users/${id}`,
+        {
+          name,
+          surname,
+          job,
+          details,
+          gender,
+          email,
+          birthDate,
+        }
       );
       return response.data;
     } catch (err) {
       console.log(err);
+      throw err; // Hata durumunda hatayı fırlatın, böylece kullanıcı bilgilendirilebilir
     }
   }
 );

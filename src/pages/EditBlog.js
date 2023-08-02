@@ -19,13 +19,16 @@ const EditBlog = () => {
   const navigate = useNavigate();
 
   const loadBlog = () => {
-    setName(data.name);
-    setSurname(data.surname);
-    setDetails(data.details);
-    setGender(data.gender);
-    setEmail(data.email);
-    setBirthDate(data.birthDate);
-    setJob(data.job);
+    if (data) {
+      // Kontrol edin: data tanımlı mı?
+      setName(data.name);
+      setSurname(data.surname);
+      setDetails(data.details);
+      setGender(data.gender);
+      setEmail(data.email);
+      setBirthDate(data.birthDate);
+      setJob(data.job);
+    }
   };
 
   useEffect(() => {
@@ -41,14 +44,22 @@ const EditBlog = () => {
   }, [dispatch, id]);
   console.log(id);
   const handleSubmit = (e) => {
-    // const body = { id, name, surname, job, details, gender, email, birthDate };
-    // console.log(body);
     e.preventDefault();
-    dispatch(updateUser({ name }));
+    const updatedUser = {
+      id, // Assuming id is the user ID you want to update
+      name,
+      surname,
+      job,
+      details,
+      gender,
+      email,
+      birthDate,
+    };
 
-    // setTimeout(() => {
-    //   navigate("/blog");
-    // }, 1000);
+    dispatch(updateUser(updatedUser));
+
+    // After dispatching the updateUser action, you can navigate to the desired page.
+    navigate("/blog");
   };
 
   return (
