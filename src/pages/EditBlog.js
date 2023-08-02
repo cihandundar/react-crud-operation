@@ -20,7 +20,6 @@ const EditBlog = () => {
 
   const loadBlog = () => {
     if (data) {
-      // Kontrol edin: data tanımlı mı?
       setName(data.name);
       setSurname(data.surname);
       setDetails(data.details);
@@ -46,7 +45,7 @@ const EditBlog = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedUser = {
-      id, // Assuming id is the user ID you want to update
+      id,
       name,
       surname,
       job,
@@ -58,7 +57,6 @@ const EditBlog = () => {
 
     dispatch(updateUser(updatedUser));
 
-    // After dispatching the updateUser action, you can navigate to the desired page.
     navigate("/blog");
   };
 
